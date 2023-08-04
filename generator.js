@@ -795,9 +795,16 @@ const generator = (assetsPath = 'assets') => {
     bgPos,
     bgRepeat,
   })
+  console.log(stack[0])
   const styledTemplate = template.replace(/<article>/, `<article> ${style}`)
   return {
-    "theory": "<ТекстТеории>",
+    "theory": `
+    Используйте шрифты: ${[headingFont, baseFont]},
+    Размеры шрифта и высота линии кратны ${multiplier},
+    Используйте цвета: ${[baseColor, headingColor, accentColor, bgColor + '44']},
+    Изображение фона: ${patternUrl},
+    Размер фонового изображения кратен ${bgRepeat === 'no-repeat' ? 100 : 10}
+    `,
     "solution": {
       "html": styledTemplate,
     },
@@ -807,4 +814,4 @@ const generator = (assetsPath = 'assets') => {
   }
 }
 
-console.log(generator())
+console.log(generator().theory)
